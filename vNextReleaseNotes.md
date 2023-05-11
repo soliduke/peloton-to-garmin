@@ -3,14 +3,13 @@
 
 ## Features
 
-- [#406] WebUI - New page to view more detailed progress towards Annual Challenge Badges
+- Added support for mapping several more Exercises from Peloton to Garmin
+    - #466, #472
 
 ## Fixes
 
-- [#404] Fixed where outdoor Just walk/Just run could be missing GPS data on Garmin Connect
-- [#411] WebUI - Fixed issue where custom DeviceInfo file path could not be saved
-- [#414] Fixed calories missing on Garmin Connect when provided by Apple Watch
+- [#491] - Fix case where a Garmin MFA code has a leading 0 causing p2g to send incorrect code to Garmin - @jheizer
 
-## Changes
+## Housekeeping
 
-- [#402] [housekeeping] Dependency bumps
+- [#461] Bump dependencies

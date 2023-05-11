@@ -273,7 +273,17 @@ namespace Peloton
 			var workout = await workoutTask;
 			var workoutSamples = await workoutSamplesTask;
 
-			return await BuildP2GWorkoutAsync(workoutId, workout, workoutSamples);
+			var p2gWorkoutData = await BuildP2GWorkoutAsync(workoutId, workout, workoutSamples);
+
+			var classId = p2gWorkoutData?.Workout?.Ride?.Id;
+			if (!string.IsNullOrWhiteSpace(classId)
+				&& classId != "00000000000000000000000000000000")
+			{
+				var workoutSegments = await _pelotonApi.GetClassSegmentsAsync(classId);
+				p2gWorkoutData.Exercises = P2GWorkoutExerciseMapper.GetWorkoutExercises(p2gWorkoutData.Workout, workoutSegments);
+			}
+
+			return p2gWorkoutData;
 		}
 
 		private async Task<P2GWorkout> BuildP2GWorkoutAsync(string workoutId, JObject workout, JObject workoutSamples)
